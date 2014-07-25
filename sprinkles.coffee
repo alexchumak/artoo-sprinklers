@@ -14,13 +14,13 @@ sprinkles = Cylon.robot(
     port: argv.arduinoPort || "/dev/ttyACM0"
 
   devices: [
-    { group: "sprinkler", name: "sprinklers back left", driver: "led", pin: argv.sprinklersBackLeftPin || 8 },
-    { group: "sprinkler", name: "sprinklers back right", driver: "led", pin: argv.sprinklersBackRightPin || 10 },
-    { group: "sprinkler", name: "sprinklers front", driver: "led", pin: argv.sprinklersFrontPin || 12 },
+    { name: "sprinklers back left", driver: "led", pin: argv.sprinklersBackLeftPin || 8 },
+    { name: "sprinklers back right", driver: "led", pin: argv.sprinklersBackRightPin || 10 },
+    { name: "sprinklers front", driver: "led", pin: argv.sprinklersFrontPin || 12 },
 
-    { group: "sensor", name: "brightness", driver: "analogSensor", pin: argv.brightnessPin || 0 },
-    { group: "sensor", name: "humidity back", driver: "analogSensor", pin: argv.humidityBackPin || 2 },
-    { group: "sensor", name: "humidity front", driver: "analogSensor", pin: argv.humidityFrontPin || 4 }
+    { name: "brightness", driver: "analogSensor", pin: argv.brightnessPin || 0 },
+    { name: "humidity back", driver: "analogSensor", pin: argv.humidityBackPin || 2 },
+    { name: "humidity front", driver: "analogSensor", pin: argv.humidityFrontPin || 4 }
   ]
 
   commands: ['averageSamples', 'eraseLogs']
@@ -34,7 +34,7 @@ sprinkles = Cylon.robot(
     every((argv.sampleInterval || 2).seconds(), this.sample.bind(my))
 
   analogSensors: ->
-    (sensor for sensor_name, sensor of this.devices when sensor.driver.group == 'sensor')
+    (sensor for sensor_name, sensor of this.devices when sensor.driver.name == 'analogSensor')
 
   averageSamples: ->
     averages = {}
