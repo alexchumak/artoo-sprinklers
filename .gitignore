@@ -1,2 +1,3 @@
 node_modules
 sprinkles.js
+logs/*.log
